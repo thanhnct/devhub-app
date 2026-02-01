@@ -4,13 +4,23 @@
   "license": "MIT",
   "scripts": {
     "nx": "nx",
+    "typecheck": "nx run-many --target=typecheck",
     "start:webclient": "nx serve web-client",
     "build:webclient": "nx build web-client",
     "test:webclient": "nx test web-client",
+    "typecheck:webclient": "nx typecheck web-client",
     "e2e:webclient": "nx e2e web-client-e2e",
     "lint:webclient": "nx lint web-client",
     "format:webclient": "nx format:write web-client",
-    "format:check:webclient": "nx format:check web-client"
+    "format:check:webclient": "nx format:check web-client",
+    "start:webadmin": "nx serve webadmin",
+    "build:webadmin": "nx build webadmin",
+    "test:webadmin": "nx test webadmin",
+    "typecheck:webadmin": "nx typecheck webadmin",
+    "e2e:webadmin": "nx e2e webadmin-e2e",
+    "lint:webadmin": "nx lint webadmin",
+    "format:webadmin": "nx format:write webadmin",
+    "format:check:webadmin": "nx format:check webadmin"
   },
   "private": true,
   "devDependencies": {
@@ -61,12 +71,13 @@
     "vite": "^7.0.0",
     "vitest": "^3.0.0"
   },
-  "workspaces": [
-    "apps/*",
-    "libs/*"
-  ],
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.11",
+    "@mui/material": "^5.14.11",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "react-router-dom": "7.13.0"
   }
 }

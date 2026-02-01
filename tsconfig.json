@@ -8,6 +8,12 @@
     },
     {
       "path": "./apps/web-client"
+    },
+    {
+      "path": "./apps/webadmin-e2e"
+    },
+    {
+      "path": "./apps/webadmin"
     }
   ]
 }
