@@ -7,26 +7,49 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useNavigate } from "react-router-dom";
+import Checkbox from "@mui/material/Checkbox";
+// import { useNavigate } from "react-router-dom";
+
+type LoginProps = {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+};
 
 export default function Login() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const navigate = useNavigate();
+  const [data, setData] = useState<LoginProps>({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
+
   const [error, setError] = useState<string | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    // Replace with real auth logic
-    if (!email || !password) {
-      setError("Please enter email and password");
-      console.log("login attempt failed", { email, password });
+
+    if (!data.email || !data.password) {
+      setError("Please enter account and password");
+      console.log("login attempt failed", {
+        email: data.email,
+        password: data.password,
+      });
       return;
     }
+    console.log("login attempt", {
+      email: data.email,
+      password: data.password,
+      rememberMe: data.rememberMe,
+    });
     console.log("login success, navigating home");
-    // On success navigate to root
-    navigate("/");
+    //navigate("/");
   };
 
   return (
@@ -52,27 +75,36 @@ export default function Login() {
           >
             <TextField
               margin="normal"
-              required
               fullWidth
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={data.email}
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
-              required
               fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={data.password}
+              onChange={handleChange}
             />
+            <Checkbox
+              name="rememberMe"
+              checked={data.rememberMe}
+              onChange={(e) =>
+                setData((prevData) => ({
+                  ...prevData,
+                  rememberMe: e.target.checked,
+                }))
+              }
+            />
+            Remember me
             {error && (
               <Typography color="error" variant="body2" sx={{ mt: 1 }}>
                 {error}
